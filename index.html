@@ -4,414 +4,264 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Business Model Canvas - Plataforma UDH</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        .block-card {
+            transition: all 0.3s ease;
         }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .header {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: 3em;
-            color: #667eea;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        .header h2 {
-            font-size: 1.8em;
-            color: #764ba2;
-            margin-bottom: 10px;
-        }
-
-        .header p {
-            font-size: 1.2em;
-            color: #666;
-        }
-
-        .canvas-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .canvas-block {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .canvas-block:hover {
+        .block-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
-
-        .block-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid;
-        }
-
-        .block-icon {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            font-size: 20px;
-        }
-
-        .block-header h3 {
-            font-size: 1.2em;
-            font-weight: 700;
-        }
-
-        .block-content {
-            font-size: 0.95em;
-            line-height: 1.8;
-            color: #333;
-        }
-
-        .block-content p {
-            margin-bottom: 8px;
-        }
-
-        .block-content strong {
-            color: #667eea;
-            display: block;
-            margin-top: 12px;
-            margin-bottom: 5px;
-        }
-
-        .socios { border-left: 5px solid #9333ea; }
-        .socios .block-header { border-color: #9333ea; }
-        .socios .block-icon { background: #f3e8ff; color: #9333ea; }
-
-        .actividades { border-left: 5px solid #3b82f6; }
-        .actividades .block-header { border-color: #3b82f6; }
-        .actividades .block-icon { background: #dbeafe; color: #3b82f6; }
-
-        .recursos { border-left: 5px solid #10b981; }
-        .recursos .block-header { border-color: #10b981; }
-        .recursos .block-icon { background: #d1fae5; color: #10b981; }
-
-        .propuesta { border-left: 5px solid #f59e0b; }
-        .propuesta .block-header { border-color: #f59e0b; }
-        .propuesta .block-icon { background: #fef3c7; color: #f59e0b; }
-
-        .relaciones { border-left: 5px solid #ec4899; }
-        .relaciones .block-header { border-color: #ec4899; }
-        .relaciones .block-icon { background: #fce7f3; color: #ec4899; }
-
-        .segmentos { border-left: 5px solid #ef4444; }
-        .segmentos .block-header { border-color: #ef4444; }
-        .segmentos .block-icon { background: #fee2e2; color: #ef4444; }
-
-        .canales { border-left: 5px solid #14b8a6; }
-        .canales .block-header { border-color: #14b8a6; }
-        .canales .block-icon { background: #ccfbf1; color: #14b8a6; }
-
-        .ingresos { border-left: 5px solid #22c55e; }
-        .ingresos .block-header { border-color: #22c55e; }
-        .ingresos .block-icon { background: #dcfce7; color: #22c55e; }
-
-        .costos { border-left: 5px solid #f97316; }
-        .costos .block-header { border-color: #f97316; }
-        .costos .block-icon { background: #ffedd5; color: #f97316; }
-
-        .span-2 {
-            grid-column: span 2;
-        }
-
-        .span-5 {
-            grid-column: span 5;
-        }
-
-        .ventaja-section {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            margin-top: 20px;
-        }
-
-        .ventaja-section h3 {
-            font-size: 2em;
-            color: #667eea;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .ventajas-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .ventaja-card {
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-        }
-
-        .ventaja-card h4 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-        }
-
-        .ventaja-1 {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .ventaja-2 {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-        }
-
-        .ventaja-3 {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: white;
-        }
-
-        @media print {
-            body {
-                background: white;
-            }
-            .canvas-block:hover {
-                transform: none;
-            }
-        }
-
-        @media (max-width: 1200px) {
-            .canvas-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .span-2, .span-5 {
-                grid-column: span 1;
-            }
-            .ventajas-grid {
-                grid-template-columns: 1fr;
-            }
+        .block-card.active {
+            transform: scale(1.05);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.5);
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>Business Model Canvas</h1>
-            <h2>Plataforma de Resolución Académica UDH</h2>
-            <p>Marketplace de soluciones matemáticas bajo demanda</p>
+<body class="bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen p-6">
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-slate-800 mb-2">Modelo de Negocios Canvas</h1>
+            <h2 class="text-2xl text-slate-600">Plataforma de Resolución Académica UDH</h2>
+            <p class="text-slate-500 mt-2">Marketplace de soluciones matemáticas bajo demanda</p>
         </div>
 
-        <div class="canvas-grid">
-            <div class="canvas-block socios">
-                <div class="block-header">
-                    <div class="block-icon">🤝</div>
-                    <h3>Red de Socios Estratégicos</h3>
+        <!-- Fila 1: 5 bloques -->
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
+            <!-- Socios -->
+            <div class="block-card bg-purple-50 border-2 border-purple-300 rounded-lg p-4 cursor-pointer h-full" onclick="toggleActive(this)">
+                <div class="flex items-center gap-2 mb-3">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+                    </svg>
+                    <h3 class="font-bold text-sm">Red de Socios Estratégicos</h3>
                 </div>
-                <div class="block-content">
-                    <p>• Profesores/Tutores independientes (P): Estudiantes avanzados y profesionales</p>
-                    <p>• Plataforma Zoom para videoconferencias</p>
+                <div class="text-xs space-y-1">
+                    <p>• Profesores/Tutores independientes (P): Estudiantes avanzados y profesionales con conocimientos sólidos en matemáticas y otras materias</p>
+                    <p>• Plataforma Zoom: Para videoconferencias en tiempo real</p>
                     <p>• Proveedores de hosting y servicios cloud</p>
-                    <p>• Universidad UDH como aliado institucional</p>
-                    <p>• Colegios de la región para expansión futura</p>
+                    <p>• Universidad UDH: Como aliado institucional potencial para validación y acceso al mercado</p>
+                    <p>• Futuros colegios de la región para expansión</p>
                 </div>
             </div>
 
-            <div class="canvas-block actividades">
-                <div class="block-header">
-                    <div class="block-icon">⚙️</div>
-                    <h3>Actividades Clave</h3>
+            <!-- Actividades -->
+            <div class="block-card bg-blue-50 border-2 border-blue-300 rounded-lg p-4 cursor-pointer h-full" onclick="toggleActive(this)">
+                <div class="flex items-center gap-2 mb-3">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    <h3 class="font-bold text-sm">Actividades Clave</h3>
                 </div>
-                <div class="block-content">
-                    <p>• Reclutamiento y validación de profesores</p>
-                    <p>• Matching entre problemas y profesores</p>
-                    <p>• Coordinación de sesiones virtuales</p>
+                <div class="text-xs space-y-1">
+                    <p>• Reclutamiento y validación de profesores (P) por parte del Moderador (M)</p>
+                    <p>• Gestión del sistema de matching entre problemas y profesores disponibles</p>
+                    <p>• Coordinación de sesiones virtuales (creación de enlaces Zoom)</p>
                     <p>• Moderación de calidad del servicio</p>
-                    <p>• Procesamiento de pagos</p>
-                    <p>• Marketing digital hacia UDH</p>
-                    <p>• Mantenimiento de plataforma</p>
-                    <p>• Atención al cliente</p>
+                    <p>• Procesamiento de pagos y distribución de ingresos</p>
+                    <p>• Marketing digital hacia estudiantes de UDH</p>
+                    <p>• Mantenimiento y desarrollo continuo de la plataforma</p>
+                    <p>• Atención al cliente y resolución de incidencias</p>
                 </div>
             </div>
 
-            <div class="canvas-block propuesta">
-                <div class="block-header">
-                    <div class="block-icon">📚</div>
-                    <h3>Propuesta de Valor</h3>
+            <!-- Propuesta -->
+            <div class="block-card bg-yellow-50 border-2 border-yellow-300 rounded-lg p-4 cursor-pointer h-full" onclick="toggleActive(this)">
+                <div class="flex items-center gap-2 mb-3">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                    <h3 class="font-bold text-sm">Propuesta de Valor</h3>
                 </div>
-                <div class="block-content">
-                    <p>✓ Resolución en tiempo real (35 min)</p>
-                    <p>✓ Sin horarios fijos: disponibilidad flexible</p>
-                    <p>✓ Método personalizado: TU problema específico</p>
-                    <p>✓ 100% virtual y accesible</p>
-                    <p>✓ Precios competitivos: S/2 - S/6</p>
-                    <p>✓ Explicación cara a cara por video</p>
-                    <p>✓ Profesores competitivos por precio</p>
-                    <strong>NO somos academia tradicional, somos marketplace bajo demanda</strong>
+                <div class="text-xs space-y-1">
+                    <p>✓ Resolución de ejercicios matemáticos en tiempo real (35 min aprox.)</p>
+                    <p>✓ Sin horarios fijos: disponibilidad flexible según demanda</p>
+                    <p>✓ Método personalizado: se resuelve TU problema específico, no clases genéricas</p>
+                    <p>✓ Accesible desde cualquier lugar (100% virtual)</p>
+                    <p>✓ Precios competitivos: S/2 - S/6 por ejercicio</p>
+                    <p>✓ Explicación cara a cara por videoconferencia</p>
+                    <p>✓ Profesores competitivos seleccionados por mejor precio</p>
+                    <p>✓ Proceso rápido y dinámico: desde consulta hasta resolución</p>
+                    <p>Diferenciación: NO somos una academia tradicional, somos un marketplace de soluciones académicas bajo demanda</p>
                 </div>
             </div>
 
-            <div class="canvas-block relaciones">
-                <div class="block-header">
-                    <div class="block-icon">💬</div>
-                    <h3>Relaciones con Clientes</h3>
+            <!-- Relaciones -->
+            <div class="block-card bg-pink-50 border-2 border-pink-300 rounded-lg p-4 cursor-pointer h-full" onclick="toggleActive(this)">
+                <div class="flex items-center gap-2 mb-3">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                    </svg>
+                    <h3 class="font-bold text-sm">Relaciones con Clientes</h3>
                 </div>
-                <div class="block-content">
-                    <p>• Asistencia personalizada vía Intermediario</p>
-                    <p>• Comunicación directa estudiante-profesor</p>
-                    <p>• Soporte por chat/WhatsApp</p>
-                    <p>• Sistema de rating/feedback</p>
+                <div class="text-xs space-y-1">
+                    <p>• Asistencia personalizada vía Intermediario (I) para recepción de problemas</p>
+                    <p>• Comunicación directa estudiante-profesor durante sesión Zoom</p>
+                    <p>• Soporte por chat/WhatsApp para dudas y seguimiento</p>
+                    <p>• Sistema de rating/feedback para mejorar calidad</p>
                     <p>• Comunidad de usuarios (potencial)</p>
-                    <p>• Seguimiento post-sesión</p>
-                    <p>• Relación bajo demanda</p>
+                    <p>• Seguimiento post-sesión para garantizar satisfacción</p>
+                    <p>• Relación bajo demanda: el cliente decide cuándo y cuánto usar el servicio</p>
                 </div>
             </div>
 
-            <div class="canvas-block segmentos">
-                <div class="block-header">
-                    <div class="block-icon">👥</div>
-                    <h3>Segmentos de Clientes</h3>
+            <!-- Segmentos -->
+            <div class="block-card bg-red-50 border-2 border-red-300 rounded-lg p-4 cursor-pointer h-full" onclick="toggleActive(this)">
+                <div class="flex items-center gap-2 mb-3">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                    <h3 class="font-bold text-sm">Segmentos de Clientes</h3>
                 </div>
-                <div class="block-content">
-                    <strong>PRIMARIO:</strong>
-                    <p>• Estudiantes Ingeniería UDH (ciclos 1-4)</p>
-                    <p>• Cursos: Cálculo I, II, III, Álgebra</p>
+                <div class="text-xs space-y-1">
+                    <p><strong>SEGMENTO PRIMARIO:</strong></p>
+                    <p>• Estudiantes de Ingeniería de UDH (ciclos iniciales 1-4)</p>
+                    <p>• Cursos: Cálculo I, II, III, Álgebra, Geometría</p>
                     <p>• Edad: 17-22 años</p>
-                    <p>• Base matemática deficiente</p>
-                    <strong>SECUNDARIO:</strong>
-                    <p>• Otras facultades con matemáticas</p>
-                    <p>• Apoyo pre-exámenes</p>
-                    <strong>EXPANSIÓN:</strong>
-                    <p>• Colegios de Huánuco</p>
+                    <p>• Perfil: Con base matemática deficiente, frustrados con métodos tradicionales</p>
+                    <p class="h-2"></p>
+                    <p><strong>SEGMENTO SECUNDARIO:</strong></p>
+                    <p>• Estudiantes de otras facultades con cursos de matemáticas</p>
+                    <p>• Estudiantes que buscan apoyo puntual antes de exámenes</p>
+                    <p class="h-2"></p>
+                    <p><strong>EXPANSIÓN FUTURA:</strong></p>
+                    <p>• Colegios de la región Huánuco</p>
                     <p>• Otras universidades</p>
                 </div>
             </div>
+        </div>
 
-            <div class="canvas-block recursos">
-                <div class="block-header">
-                    <div class="block-icon">📦</div>
-                    <h3>Recursos Clave</h3>
+        <!-- Fila 2: 1 + 2 + 2 -->
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
+            <!-- Recursos -->
+            <div class="block-card bg-green-50 border-2 border-green-300 rounded-lg p-4 cursor-pointer h-full" onclick="toggleActive(this)">
+                <div class="flex items-center gap-2 mb-3">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                    </svg>
+                    <h3 class="font-bold text-sm">Recursos Clave</h3>
                 </div>
-                <div class="block-content">
-                    <p>• Plataforma tecnológica (en fase final)</p>
-                    <p>• Equipo de 5 fundadores</p>
-                    <p>• Base inicial de 3+ profesores</p>
-                    <p>• Infraestructura tecnológica</p>
-                    <p>• Cuentas Zoom Pro</p>
+                <div class="text-xs space-y-1">
+                    <p>• Plataforma tecnológica (app/sistema en fase final de despliegue)</p>
+                    <p>• Equipo de 5 fundadores (2 como Intermediarios y Moderadores)</p>
+                    <p>• Base inicial de 3+ profesores capacitados</p>
+                    <p>• Infraestructura tecnológica: hosting, servidores</p>
+                    <p>• Cuentas Zoom para videoconferencias</p>
                     <p>• Sistema de pagos digital</p>
-                    <p>• Capital inicial propio</p>
-                    <p>• Know-how del proceso</p>
+                    <p>• Capital inicial propio para operación</p>
+                    <p>• Know-how del proceso de resolución bajo demanda</p>
                 </div>
             </div>
 
-            <div class="canvas-block canales span-2">
-                <div class="block-header">
-                    <div class="block-icon">📡</div>
-                    <h3>Canales de Distribución</h3>
+            <!-- Canales -->
+            <div class="block-card bg-teal-50 border-2 border-teal-300 rounded-lg p-4 cursor-pointer h-full md:col-span-2" onclick="toggleActive(this)">
+                <div class="flex items-center gap-2 mb-3">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                    </svg>
+                    <h3 class="font-bold text-sm">Canales de Distribución</h3>
                 </div>
-                <div class="block-content">
+                <div class="text-xs space-y-1">
                     <p>• Plataforma digital propia (app/web)</p>
-                    <p>• WhatsApp/Telegram para contacto inicial</p>
-                    <p>• Zoom para entrega del servicio</p>
-                    <p>• Redes sociales (Facebook, Instagram, TikTok)</p>
-                    <p>• Marketing boca a boca en UDH</p>
-                    <p>• Grupos de WhatsApp universitarios</p>
-                    <p>• Publicidad en campus (carteles, volantes)</p>
+                    <p>• WhatsApp/Telegram para contacto inicial con Intermediario</p>
+                    <p>• Zoom para entrega del servicio (sesiones de resolución)</p>
+                    <p>• Redes sociales (Facebook, Instagram, TikTok) para captación</p>
+                    <p>• Marketing boca a boca dentro de UDH</p>
+                    <p>• Grupos de WhatsApp de estudiantes universitarios</p>
+                    <p>• Publicidad en campus universitario (carteles, volantes)</p>
                     <p>• Convenios futuros con centros educativos</p>
                 </div>
             </div>
 
-            <div class="canvas-block ingresos span-2">
-                <div class="block-header">
-                    <div class="block-icon">💰</div>
-                    <h3>Fuentes de Ingreso</h3>
+            <!-- Ingresos -->
+            <div class="block-card bg-green-100 border-2 border-green-400 rounded-lg p-4 cursor-pointer h-full md:col-span-2" onclick="toggleActive(this)">
+                <div class="flex items-center gap-2 mb-3">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <h3 class="font-bold text-sm">Fuentes de Ingreso</h3>
                 </div>
-                <div class="block-content">
-                    <strong>MODELO DE COBRO POR SERVICIO:</strong>
-                    <p>• Precio usuario final: S/2 - S/6 por ejercicio</p>
-                    <p>• Estructura: Precio profesor (S/1-5) + S/1 comisión</p>
-                    <strong>Ejemplo: Profesor cobra S/3, usuario paga S/4</strong>
-                    <p>→ S/3 para Profesor (P)</p>
-                    <p>→ S/1 para Plataforma (I, M, operación)</p>
-                    <strong>MODELOS ADICIONALES:</strong>
+                <div class="text-xs space-y-1">
+                    <p><strong>MODELO DE COBRO POR SERVICIO:</strong></p>
+                    <p>• Precio al usuario final: S/2 - S/6 por ejercicio</p>
+                    <p>• Estructura: Precio profesor (S/1-5) + S/1 comisión plataforma</p>
+                    <p class="h-2"></p>
+                    <p>Ejemplo: Si profesor cobra S/3, usuario paga S/4</p>
+                    <p>• S/3 → Profesor (P)</p>
+                    <p>• S/1 → Plataforma (dividido entre I, M, operación)</p>
+                    <p class="h-2"></p>
+                    <p><strong>MODELO DE INGRESOS:</strong></p>
                     <p>• Pago por transacción completada</p>
-                    <p>• Modelo freemium: primera consulta gratis</p>
-                    <p>• Paquetes: 5, 10, 20 ejercicios con descuento</p>
+                    <p>• Potencial modelo freemium: primera consulta gratis</p>
+                    <p>• Paquetes futuros: 5, 10, 20 ejercicios con descuento</p>
                     <p>• Suscripciones mensuales (futuro)</p>
                 </div>
             </div>
         </div>
 
-        <div class="canvas-grid">
-            <div class="canvas-block costos span-5">
-                <div class="block-header">
-                    <div class="block-icon">💼</div>
-                    <h3>Estructura de Costos</h3>
+        <!-- Fila 3: Costos -->
+        <div class="grid grid-cols-1 gap-4 mb-8">
+            <div class="block-card bg-orange-50 border-2 border-orange-300 rounded-lg p-4 cursor-pointer" onclick="toggleActive(this)">
+                <div class="flex items-center gap-2 mb-3">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                    <h3 class="font-bold text-sm">Estructura de Costos</h3>
                 </div>
-                <div class="block-content">
-                    <strong>COSTOS FIJOS MENSUALES:</strong>
+                <div class="text-xs space-y-1">
+                    <p><strong>COSTOS FIJOS MENSUALES:</strong></p>
                     <p>• Hosting y servicios cloud: S/50-150/mes</p>
                     <p>• Cuentas Zoom Pro: S/60-100/mes</p>
                     <p>• Marketing digital básico: S/100-300/mes</p>
                     <p>• Dominio y SSL: S/20/mes</p>
-                    <strong>COSTOS VARIABLES:</strong>
+                    <p class="h-2"></p>
+                    <p><strong>COSTOS VARIABLES:</strong></p>
                     <p>• Pago a profesores: 75-83% del precio por ejercicio</p>
                     <p>• Comisiones de pasarela de pago: 3-4% por transacción</p>
-                    <strong>COSTOS INICIALES (YA CUBIERTOS):</strong>
+                    <p class="h-2"></p>
+                    <p><strong>COSTOS INICIALES (YA CUBIERTOS):</strong></p>
                     <p>• Desarrollo de la plataforma</p>
                     <p>• Capital de trabajo inicial</p>
-                    <strong>Total estimado operación mensual: S/500-800 (fase inicial)</strong>
+                    <p class="h-2"></p>
+                    <p>Total estimado operación mensual: S/500-800 (fase inicial)</p>
                 </div>
             </div>
         </div>
 
-        <div class="ventaja-section">
-            <h3>💡 Ventaja Competitiva Clave</h3>
-            <div class="ventajas-grid">
-                <div class="ventaja-card ventaja-1">
-                    <h4>⚡ Velocidad</h4>
-                    <p>35 minutos desde contacto hasta solución completa</p>
+        <!-- Ventaja Competitiva -->
+        <div class="mt-8 p-6 bg-white rounded-lg shadow-md border-2 border-slate-200">
+            <h3 class="text-xl font-bold text-slate-800 mb-4">💡 Ventaja Competitiva Clave</h3>
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="p-4 bg-blue-50 rounded-lg">
+                    <h4 class="font-bold text-blue-800 mb-2">Velocidad</h4>
+                    <p class="text-sm text-slate-700">35 minutos desde contacto hasta solución completa</p>
                 </div>
-                <div class="ventaja-card ventaja-2">
-                    <h4>🎯 Personalización</h4>
-                    <p>Tu problema específico, no clases genéricas</p>
+                <div class="p-4 bg-green-50 rounded-lg">
+                    <h4 class="font-bold text-green-800 mb-2">Personalización</h4>
+                    <p class="text-sm text-slate-700">Tu problema específico, no clases genéricas</p>
                 </div>
-                <div class="ventaja-card ventaja-3">
-                    <h4>🔄 Flexibilidad</h4>
-                    <p>Sin horarios fijos, disponible cuando lo necesites</p>
+                <div class="p-4 bg-purple-50 rounded-lg">
+                    <h4 class="font-bold text-purple-800 mb-2">Flexibilidad</h4>
+                    <p class="text-sm text-slate-700">Sin horarios fijos, disponible 24/7</p>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        function toggleActive(element) {
+            // Remover clase active de todos
+            document.querySelectorAll('.block-card').forEach(card => {
+                if (card !== element) {
+                    card.classList.remove('active');
+                }
+            });
+            // Toggle en el elemento clickeado
+            element.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
