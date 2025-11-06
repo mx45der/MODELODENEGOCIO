@@ -3,324 +3,590 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business Model Canvas MEJORADO - Plataforma UDH</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Business Model Canvas</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js"></script>
     <style>
-        .block-card {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(to bottom right, #f8fafc, #e2e8f0);
+            min-height: 100vh;
+            padding: 1.5rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            font-size: 1.5rem;
+            color: #64748b;
+        }
+
+        .problem-box {
+            display: inline-block;
+            background: #fee2e2;
+            border: 2px solid #f87171;
+            border-radius: 0.5rem;
+            padding: 1rem 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .problem-box p {
+            font-size: 0.875rem;
+            font-weight: bold;
+            color: #991b1b;
+        }
+
+        .problem-box .subtitle {
+            font-size: 0.75rem;
+            color: #b91c1c;
+            margin-top: 0.25rem;
+        }
+
+        .canvas-grid {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .row-1 {
+            grid-template-columns: repeat(5, 1fr);
+        }
+
+        .row-2 {
+            grid-template-columns: 1fr 2fr 2fr;
+        }
+
+        .block {
+            border: 2px solid;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            cursor: pointer;
             transition: all 0.3s ease;
+            min-height: 300px;
         }
-        .block-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+
+        .block:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
-        .block-card.active {
-            transform: scale(1.05);
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.5);
+
+        .block.active {
+            transform: scale(1.02);
+            /* Add a subtle blue ring using box-shadow and keep the existing drop shadow */
+            box-shadow: 0 0 0 4px rgba(96,165,250,0.25), 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .block-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .block-header h3 {
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .block-content {
+            font-size: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .block-content p {
+            margin-bottom: 0.25rem;
+        }
+
+        .block-content .empty {
+            height: 0.25rem;
+        }
+
+        /* Block Colors */
+        .socios { background: #faf5ff; border-color: #c084fc; }
+        .actividades { background: #eff6ff; border-color: #60a5fa; }
+        .propuesta { background: #fefce8; border-color: #facc15; }
+        .relaciones { background: #fce7f3; border-color: #f9a8d4; }
+        .segmentos { background: #fee2e2; border-color: #fca5a5; }
+        .recursos { background: #f0fdf4; border-color: #86efac; }
+        .canales { background: #f0fdfa; border-color: #5eead4; }
+        .ingresos { background: #dcfce7; border-color: #4ade80; }
+        .costos { background: #ffedd5; border-color: #fdba74; }
+
+        .info-section {
+            background: linear-gradient(to right, #fee2e2, #fed7aa);
+            border: 2px solid #fca5a5;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-section h3 {
+            font-size: 1.5rem;
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+
+        .causes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .cause-card {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .cause-card.causa1 { border-left: 4px solid #3b82f6; }
+        .cause-card.causa2 { border-left: 4px solid #22c55e; }
+        .cause-card.causa3 { border-left: 4px solid #a855f7; }
+
+        .cause-card h4 {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .causa1 h4 { color: #1e40af; }
+        .causa2 h4 { color: #166534; }
+        .causa3 h4 { color: #6b21a8; }
+
+        .cause-card .solution {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 0.5rem;
+        }
+
+        .cause-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .cause-card li {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-bottom: 0.25rem;
+        }
+
+        .logic-section {
+            background: white;
+            border: 2px solid #cbd5e1;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .logic-section h3 {
+            font-size: 1.25rem;
+            color: #1e293b;
+            margin-bottom: 0.75rem;
+        }
+
+        .logic-content {
+            background: #f8fafc;
+            border-left: 4px solid #94a3b8;
+            border-radius: 0.25rem;
+            padding: 1rem;
+        }
+
+        .logic-content > p {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .logic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 0.75rem;
+            font-size: 0.75rem;
+        }
+
+        .logic-item .title {
+            font-weight: bold;
+            color: #1e40af;
+        }
+
+        .logic-item .desc {
+            color: #64748b;
+        }
+
+        @media (max-width: 768px) {
+            .row-1 {
+                grid-template-columns: 1fr;
+            }
+            .row-2 {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen p-6">
-    <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-8">
-            <h1 class="text-4xl font-bold text-slate-800 mb-2">Modelo de Negocios Canvas - MEJORADO</h1>
-            <h2 class="text-2xl text-slate-600">Plataforma de Éxito Académico UDH</h2>
-            <p class="text-slate-500 mt-2">Mentoría + Base de Datos + Suscripciones</p>
-            <div class="mt-4 inline-block bg-green-100 border-2 border-green-400 rounded-lg px-4 py-2">
-                <p class="text-sm font-semibold text-green-800">✨ MODELO MEJORADO: 3 Módulos Integrados</p>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>MODELO DE NEGOCIOS CANVAS</h1>
+            <h2>Plataforma de Éxito Académico UDH</h2>
+            <div class="problem-box">
+                <p>PROBLEMA CENTRAL: BAJO RENDIMIENTO EN MATEMÁTICAS</p>
+                <p class="subtitle">Cada bloque ataca las 3 CAUSAS identificadas</p>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
-            <div class="block-card bg-purple-50 border-2 border-purple-300 rounded-lg p-4 cursor-pointer h-full" onclick="toggleActive(this)">
-                <div class="flex items-center gap-2 mb-3">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
-                    </svg>
-                    <h3 class="font-bold text-sm">Red de Socios Estratégicos</h3>
+        <div class="canvas-grid row-1">
+            <div class="block socios" onclick="toggleBlock('socios')">
+                <div class="block-header">
+                    <i data-lucide="link" style="width: 20px; height: 20px;"></i>
+                    <h3>SOCIOS ESTRATÉGICOS</h3>
                 </div>
-                <div class="text-xs space-y-1">
-                    <p>• Profesores/Tutores (P): Para servicio de mentoría bajo demanda</p>
-                    <p>• Estudiantes avanzados: Contribuyen contenido a la base de datos</p>
-                    <p>• Docentes UDH: Información sobre estructura de cursos</p>
-                    <p>• Plataforma Zoom: Para videoconferencias de mentoría</p>
-                    <p>• Proveedores de hosting y cloud</p>
-                    <p>• Universidad UDH: Aliado institucional</p>
-                    <p>• Futuros colegios para expansión</p>
-                </div>
+                <div class="block-content" id="socios-content"></div>
             </div>
 
-            <div class="block-card bg-blue-50 border-2 border-blue-300 rounded-lg p-4 cursor-pointer h-full" onclick="toggleActive(this)">
-                <div class="flex items-center gap-2 mb-3">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                    </svg>
-                    <h3 class="font-bold text-sm">Actividades Clave</h3>
+            <div class="block actividades" onclick="toggleBlock('actividades')">
+                <div class="block-header">
+                    <i data-lucide="settings" style="width: 20px; height: 20px;"></i>
+                    <h3>ACTIVIDADES CLAVE</h3>
                 </div>
-                <div class="text-xs space-y-1">
-                    <p>• MENTORÍA: Matching y sesiones bajo demanda</p>
-                    <p>• BASE DE DATOS: Curación de contenido académico</p>
-                    <p>• Reclutamiento y validación de profesores</p>
-                    <p>• Recolección de material (crowdsourcing)</p>
-                    <p>• Categorización por curso y profesor</p>
-                    <p>• Mantenimiento de plataforma</p>
-                    <p>• Marketing digital</p>
-                    <p>• Gestión de suscripciones</p>
-                </div>
+                <div class="block-content" id="actividades-content"></div>
             </div>
 
-            <div class="block-card bg-yellow-50 border-2 border-yellow-300 rounded-lg p-4 cursor-pointer h-full" onclick="toggleActive(this)">
-                <div class="flex items-center gap-2 mb-3">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                    </svg>
-                    <h3 class="font-bold text-sm">Propuesta de Valor</h3>
+            <div class="block propuesta" onclick="toggleBlock('propuesta')">
+                <div class="block-header">
+                    <i data-lucide="book-open" style="width: 20px; height: 20px;"></i>
+                    <h3>PROPUESTA DE VALOR</h3>
                 </div>
-                <div class="text-xs space-y-1">
-                    <p><strong>🎯 MÓDULO 1 - MENTORÍA:</strong></p>
-                    <p>✓ Resolución en tiempo real (35 min)</p>
-                    <p>✓ Explicación 1-a-1 por Zoom</p>
-                    <p>✓ Sin horarios fijos</p>
-                    <p class="h-1"></p>
-                    <p><strong>📚 MÓDULO 2 - BASE DE DATOS:</strong></p>
-                    <p>✓ Exámenes pasados por profesor</p>
-                    <p>✓ Trabajos modelo calificados</p>
-                    <p>✓ Guías de estudio</p>
-                    <p>✓ Tips: Cómo aprobar con profesor X</p>
-                    <p class="h-1"></p>
-                    <p><strong>⚡ MÓDULO 3 - SUSCRIPCIÓN:</strong></p>
-                    <p>✓ Acceso ilimitado 24/7</p>
-                    <p>✓ Mentorías incluidas/mes</p>
-                    <p>✓ Material actualizado</p>
-                    <p class="h-1"></p>
-                    <p><strong>💡 NO enseñamos, DAMOS HERRAMIENTAS para aprobar</strong></p>
-                </div>
+                <div class="block-content" id="propuesta-content"></div>
             </div>
 
-            <div class="block-card bg-pink-50 border-2 border-pink-300 rounded-lg p-4 cursor-pointer h-full" onclick="toggleActive(this)">
-                <div class="flex items-center gap-2 mb-3">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-                    </svg>
-                    <h3 class="font-bold text-sm">Relaciones con Clientes</h3>
+            <div class="block relaciones" onclick="toggleBlock('relaciones')">
+                <div class="block-header">
+                    <i data-lucide="message-square" style="width: 20px; height: 20px;"></i>
+                    <h3>RELACIONES CON CLIENTES</h3>
                 </div>
-                <div class="text-xs space-y-1">
-                    <p>• Onboarding: Tour de 3 módulos</p>
-                    <p>• Asistencia para mentoría</p>
-                    <p>• Acceso self-service a base</p>
-                    <p>• Comunidad de estudiantes</p>
-                    <p>• Programa de contribución</p>
-                    <p>• Soporte chat/WhatsApp</p>
-                    <p>• Notificaciones de contenido</p>
-                    <p>• Rating de utilidad</p>
-                    <p>• Engagement constante</p>
-                </div>
+                <div class="block-content" id="relaciones-content"></div>
             </div>
 
-            <div class="block-card bg-red-50 border-2 border-red-300 rounded-lg p-4 cursor-pointer h-full" onclick="toggleActive(this)">
-                <div class="flex items-center gap-2 mb-3">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                    </svg>
-                    <h3 class="font-bold text-sm">Segmentos de Clientes</h3>
+            <div class="block segmentos" onclick="toggleBlock('segmentos')">
+                <div class="block-header">
+                    <i data-lucide="users" style="width: 20px; height: 20px;"></i>
+                    <h3>SEGMENTOS DE CLIENTES</h3>
                 </div>
-                <div class="text-xs space-y-1">
-                    <p><strong>A: Ocasionales (Pay-per-use)</strong></p>
-                    <p>• Ayuda puntual pre-examen</p>
-                    <p>• Mentoría esporádica</p>
-                    <p class="h-1"></p>
-                    <p><strong>B: Suscritos (Recurring) ⭐</strong></p>
-                    <p>• Aprobar TODOS los cursos</p>
-                    <p>• Acceso ilimitado 24/7</p>
-                    <p>• Ciclos 1-4 con cursos difíciles</p>
-                    <p>• Mayor valor lifetime</p>
-                    <p class="h-1"></p>
-                    <p><strong>C: Contribuyentes</strong></p>
-                    <p>• Comparten material</p>
-                    <p>• Ganan créditos gratis</p>
-                    <p>• Status top contributor</p>
-                </div>
+                <div class="block-content" id="segmentos-content"></div>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
-            <div class="block-card bg-green-50 border-2 border-green-300 rounded-lg p-4 cursor-pointer h-full" onclick="toggleActive(this)">
-                <div class="flex items-center gap-2 mb-3">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
-                    </svg>
-                    <h3 class="font-bold text-sm">Recursos Clave</h3>
+        <div class="canvas-grid row-2">
+            <div class="block recursos" onclick="toggleBlock('recursos')">
+                <div class="block-header">
+                    <i data-lucide="package" style="width: 20px; height: 20px;"></i>
+                    <h3>RECURSOS CLAVE</h3>
                 </div>
-                <div class="text-xs space-y-1">
-                    <p>• Plataforma 3 módulos</p>
-                    <p>• Base de datos académica</p>
-                    <p>• Equipo 5 fundadores</p>
-                    <p>• Red de profesores (3+)</p>
-                    <p>• Red de contribuyentes</p>
-                    <p>• Infraestructura cloud</p>
-                    <p>• Cuentas Zoom</p>
-                    <p>• Sistema de suscripciones</p>
-                    <p>• Capital inicial</p>
-                </div>
+                <div class="block-content" id="recursos-content"></div>
             </div>
 
-            <div class="block-card bg-teal-50 border-2 border-teal-300 rounded-lg p-4 cursor-pointer h-full md:col-span-2" onclick="toggleActive(this)">
-                <div class="flex items-center gap-2 mb-3">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-                    </svg>
-                    <h3 class="font-bold text-sm">Canales de Distribución</h3>
+            <div class="block canales" onclick="toggleBlock('canales')">
+                <div class="block-header">
+                    <i data-lucide="trending-up" style="width: 20px; height: 20px;"></i>
+                    <h3>CANALES DE DISTRIBUCIÓN</h3>
                 </div>
-                <div class="text-xs space-y-1">
-                    <p><strong>• PLATAFORMA WEB/APP:</strong></p>
-                    <p>  - Módulo Mentoría</p>
-                    <p>  - Módulo Base de Datos</p>
-                    <p>  - Portal Suscripciones</p>
-                    <p>• WhatsApp Business</p>
-                    <p>• Zoom para sesiones</p>
-                    <p>• Email marketing</p>
-                    <p>• Redes sociales</p>
-                    <p>• Grupos WhatsApp estudiantiles</p>
-                    <p>• Stands en campus UDH</p>
-                    <p>• Programa de referidos</p>
-                </div>
+                <div class="block-content" id="canales-content"></div>
             </div>
 
-            <div class="block-card bg-green-100 border-2 border-green-400 rounded-lg p-4 cursor-pointer h-full md:col-span-2" onclick="toggleActive(this)">
-                <div class="flex items-center gap-2 mb-3">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                    <h3 class="font-bold text-sm">Fuentes de Ingreso</h3>
+            <div class="block ingresos" onclick="toggleBlock('ingresos')">
+                <div class="block-header">
+                    <i data-lucide="dollar-sign" style="width: 20px; height: 20px;"></i>
+                    <h3>FUENTES DE INGRESO</h3>
                 </div>
-                <div class="text-xs space-y-1">
-                    <p><strong>FLUJO 1: PAY-PER-USE</strong></p>
-                    <p>• S/2-6 por sesión</p>
-                    <p>• Comisión: S/1 (25%)</p>
-                    <p class="h-1"></p>
-                    <p><strong>FLUJO 2: SUSCRIPCIONES ⭐</strong></p>
-                    <p>• BÁSICO: S/20/mes</p>
-                    <p>  Base + 1 mentoría</p>
-                    <p>• PREMIUM: S/35/mes</p>
-                    <p>  Base + 4 mentorías</p>
-                    <p>• PRO: S/50/mes</p>
-                    <p>  Mentorías ilimitadas</p>
-                    <p class="h-1"></p>
-                    <p><strong>FLUJO 3: PREMIUM</strong></p>
-                    <p>• Paquetes: S/5-10</p>
-                    <p>• Trabajos: S/3-5</p>
-                    <p class="h-1"></p>
-                    <p>70% suscripciones | 30% ocasional</p>
+                <div class="block-content" id="ingresos-content"></div>
+            </div>
+        </div>
+
+        <div class="canvas-grid">
+            <div class="block costos" onclick="toggleBlock('costos')">
+                <div class="block-header">
+                    <i data-lucide="briefcase" style="width: 20px; height: 20px;"></i>
+                    <h3>ESTRUCTURA DE COSTOS</h3>
+                </div>
+                <div class="block-content" id="costos-content"></div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>CÓMO CADA COMPONENTE ATACA LAS CAUSAS</h3>
+            <div class="causes-grid">
+                <div class="cause-card causa1">
+                    <h4>CAUSA 1: Deficiencias Previas</h4>
+                    <p class="solution">SOLUCIÓN: Mentoría 1-a-1</p>
+                    <ul>
+                        <li>✓ Profesores expertos (Recursos)</li>
+                        <li>✓ Sesiones personalizadas (Actividades)</li>
+                        <li>✓ Resolución de vacíos conceptuales</li>
+                        <li>✓ Zoom para explicaciones (Socios)</li>
+                    </ul>
+                </div>
+                <div class="cause-card causa2">
+                    <h4>CAUSA 2: Hábitos Inadecuados</h4>
+                    <p class="solution">SOLUCIÓN: Base de Datos</p>
+                    <ul>
+                        <li>✓ 500+ exámenes organizados (Recursos)</li>
+                        <li>✓ Curación profesional (Actividades)</li>
+                        <li>✓ Guías 'Cómo aprobar' por profesor</li>
+                        <li>✓ Estudiante sabe QUÉ priorizar</li>
+                    </ul>
+                </div>
+                <div class="cause-card causa3">
+                    <h4>CAUSA 3: Baja Motivación</h4>
+                    <p class="solution">SOLUCIÓN: Comunidad 24/7</p>
+                    <ul>
+                        <li>✓ Acceso permanente (Canales)</li>
+                        <li>✓ Comunidad de apoyo (Relaciones)</li>
+                        <li>✓ Gamificación y reconocimiento</li>
+                        <li>✓ Casos de éxito visibles</li>
+                    </ul>
                 </div>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 gap-4 mb-8">
-            <div class="block-card bg-orange-50 border-2 border-orange-300 rounded-lg p-4 cursor-pointer" onclick="toggleActive(this)">
-                <div class="flex items-center gap-2 mb-3">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                    </svg>
-                    <h3 class="font-bold text-sm">Estructura de Costos</h3>
-                </div>
-                <div class="text-xs space-y-1 grid md:grid-cols-3 gap-4">
-                    <div>
-                        <p><strong>COSTOS FIJOS MENSUALES:</strong></p>
-                        <p>• Hosting + cloud: S/100-200</p>
-                        <p>• Zoom Pro (3): S/180</p>
-                        <p>• Marketing: S/150-400</p>
-                        <p>• Software: S/50</p>
-                        <p>• Curator: S/500</p>
-                        <p><strong>Total: S/980-1,330</strong></p>
+        <div class="logic-section">
+            <h3>LÓGICA DEL MODELO</h3>
+            <div class="logic-content">
+                <p>Cada bloque del Canvas está diseñado para atacar al menos una causa:</p>
+                <div class="logic-grid">
+                    <div class="logic-item">
+                        <p class="title">PROPUESTA DE VALOR:</p>
+                        <p class="desc">→ Integra soluciones a las 3 causas</p>
                     </div>
-                    <div>
-                        <p><strong>COSTOS VARIABLES:</strong></p>
-                        <p>• Profesores: S/3/sesión</p>
-                        <p>• Incentivos: S/1-2/material</p>
-                        <p>• Pasarela: 3-4%</p>
+                    <div class="logic-item">
+                        <p class="title">ACTIVIDADES CLAVE:</p>
+                        <p class="desc">→ Curación (C2) + Mentoría (C1) + Comunidad (C3)</p>
                     </div>
-                    <div>
-                        <p><strong>COSTOS INICIALES:</strong></p>
-                        <p>• Desarrollo BD: S/2,000</p>
-                        <p>• Contenido inicial: S/500</p>
-                        <p class="h-2"></p>
-                        <p><strong>Nota: Suscripciones REDUCEN costos variables</strong></p>
+                    <div class="logic-item">
+                        <p class="title">RECURSOS:</p>
+                        <p class="desc">→ Profesores (C1) + BD (C2) + Plataforma (C3)</p>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="mt-8 p-6 bg-gradient-to-r from-blue-50 to-green-50 rounded-lg shadow-lg border-2 border-blue-300">
-            <h3 class="text-2xl font-bold text-slate-800 mb-4">🚀 Ventajas del Modelo MEJORADO</h3>
-            <div class="grid md:grid-cols-3 gap-4">
-                <div class="p-4 bg-white rounded-lg shadow">
-                    <h4 class="font-bold text-blue-800 mb-2">📈 Ingresos Recurrentes</h4>
-                    <p class="text-sm text-slate-700">Suscripciones generan flujo predecible vs. pago por uso. Mayor estabilidad financiera.</p>
-                </div>
-                <div class="p-4 bg-white rounded-lg shadow">
-                    <h4 class="font-bold text-green-800 mb-2">⚡ Escalabilidad</h4>
-                    <p class="text-sm text-slate-700">Base de datos se crea una vez, se vende infinitas veces. Bajo costo marginal.</p>
-                </div>
-                <div class="p-4 bg-white rounded-lg shadow">
-                    <h4 class="font-bold text-purple-800 mb-2">🎯 Mayor Valor</h4>
-                    <p class="text-sm text-slate-700">Los estudiantes no solo resuelven UN ejercicio, aseguran aprobar TODO el curso.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="mt-6 p-6 bg-white rounded-lg shadow-md border-2 border-slate-200">
-            <h3 class="text-xl font-bold text-slate-800 mb-4">💡 Los 3 Módulos que Resuelven 3 Problemas</h3>
-            <div class="space-y-4">
-                <div class="flex gap-4 items-start p-3 bg-blue-50 rounded-lg">
-                    <div class="bg-blue-500 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">1</div>
-                    <div>
-                        <h4 class="font-bold text-blue-900">MENTORÍA (Problema: Ejercicio específico que no entiendo)</h4>
-                        <p class="text-sm text-slate-700 mt-1">Solución: Sesión 1-a-1 por Zoom, me lo explican en 30 min</p>
+                    <div class="logic-item">
+                        <p class="title">COSTOS:</p>
+                        <p class="desc">→ Distribuidos según prioridad de cada causa</p>
                     </div>
-                </div>
-                <div class="flex gap-4 items-start p-3 bg-green-50 rounded-lg">
-                    <div class="bg-green-500 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">2</div>
-                    <div>
-                        <h4 class="font-bold text-green-900">BASE DE DATOS (Problema: No sé cómo aprobar el curso del profesor X)</h4>
-                        <p class="text-sm text-slate-700 mt-1">Solución: Acceso a exámenes pasados, trabajos modelo y guía "cómo aprobar con ese profe"</p>
-                    </div>
-                </div>
-                <div class="flex gap-4 items-start p-3 bg-purple-50 rounded-lg">
-                    <div class="bg-purple-500 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">3</div>
-                    <div>
-                        <h4 class="font-bold text-purple-900">SUSCRIPCIÓN (Problema: Necesito apoyo constante, no solo una vez)</h4>
-                        <p class="text-sm text-slate-700 mt-1">Solución: Acceso ilimitado 24/7 a todo + mentorías incluidas cada mes</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="mt-6 p-6 bg-yellow-50 rounded-lg shadow-md border-2 border-yellow-300">
-            <h3 class="text-xl font-bold text-yellow-900 mb-3">⚠️ CAMBIO CLAVE DE ENFOQUE</h3>
-            <div class="grid md:grid-cols-2 gap-4">
-                <div class="p-4 bg-red-100 rounded-lg border-2 border-red-300">
-                    <p class="font-bold text-red-800 mb-2">❌ ANTES (Menos rentable):</p>
-                    <p class="text-sm text-slate-700">"Te enseñamos para que aprendas matemáticas"</p>
-                    <p class="text-xs text-slate-600 mt-2 italic">→ Enfocado en aprendizaje profundo</p>
-                </div>
-                <div class="p-4 bg-green-100 rounded-lg border-2 border-green-400">
-                    <p class="font-bold text-green-800 mb-2">✅ AHORA (Más rentable):</p>
-                    <p class="text-sm text-slate-700">"Te damos las herramientas para APROBAR tu curso"</p>
-                    <p class="text-xs text-slate-600 mt-2 italic">→ Enfocado en resultado concreto: pasar el curso</p>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        function toggleActive(element) {
-            document.querySelectorAll('.block-card').forEach(card => {
-                if (card !== element) {
-                    card.classList.remove('active');
-                }
-            });
-            element.classList.toggle('active');
+        const blocks = {
+            propuesta: [
+                " SOLUCIÓN INTEGRAL A LAS 3 CAUSAS:",
+                "",
+                "→ CAUSA 1 (Deficiencias previas):",
+                "• Mentoría 1-a-1: Resuelve vacíos conceptuales en 35 min",
+                "• Explicación adaptada al nivel del estudiante",
+                "",
+                "→ CAUSA 2 (Hábitos inadecuados):",
+                "• Base de datos de exámenes por profesor",
+                "• Guías 'Cómo aprobar con Prof. X'",
+                "• Trabajos modelo bien calificados",
+                "• Estudiante aprende QUÉ priorizar",
+                "",
+                "→ CAUSA 3 (Baja motivación):",
+                "• Acceso 24/7 reduce ansiedad",
+                "• Comunidad de apoyo y éxito compartido",
+                "• Resultados rápidos aumentan confianza",
+                "",
+                "💡 RESULTADO: De 60% a 85% de aprobación"
+            ],
+            segmentos: [
+                "Estudiantes Ingeniería UDH ciclos 1-4",
+                "",
+                "PERFIL según CAUSAS:",
+                "",
+                "• CAUSA 1: 72% con vacíos en álgebra",
+                "  → Necesitan refuerzo de bases",
+                "",
+                "• CAUSA 2: Estudian sin estrategia",
+                "  → Necesitan orientación qué estudiar",
+                "",
+                "• CAUSA 3: Frustrados, desmotivados",
+                "  → Necesitan apoyo emocional y éxitos rápidos",
+                "",
+                "Capacidad pago: S/20-50/mes",
+                "NSE: C y D (70% del target)"
+            ],
+            relaciones: [
+                "DISEÑADAS PARA ATACAR CAUSAS:",
+                "",
+                "→ CAUSA 1 (Deficiencias):",
+                "• Asistencia personal vía Intermediario",
+                "• Mentoría 1-a-1 humanizada",
+                "",
+                "→ CAUSA 2 (Hábitos):",
+                "• Acceso self-service a BD organizada",
+                "• Notificaciones: 'Examen nuevo Prof. X'",
+                "• Dashboard de progreso personal",
+                "",
+                "→ CAUSA 3 (Motivación):",
+                "• Comunidad de suscriptores (Telegram)",
+                "• Gamificación (badges, rankings)",
+                "• Testimonios de éxito peer-to-peer"
+            ],
+            canales: [
+                "MENSAJES SEGÚN CAUSAS:",
+                "",
+                "• TikTok/IG:",
+                "  'Llena tus vacíos en 35 min' (C1)",
+                "  'Exámenes del Prof. X listos' (C2)",
+                "  'Aprueba con confianza' (C3)",
+                "",
+                "• Plataforma digital 24/7",
+                "• WhatsApp para mentoría urgente",
+                "• Zoom para sesiones explicativas",
+                "",
+                "• Marketing testimonial:",
+                "  'Mejoré de 11 a 16 en un ciclo'",
+                "  → Ataca percepción negativa (C3)"
+            ],
+            ingresos: [
+                "SUSCRIPCIONES (70% ingresos):",
+                "",
+                "Básico S/20: BD + 1 mentoría/mes",
+                "Premium S/35: BD + 4 mentorías/mes ",
+                "Pro S/50: BD + mentorías ilimitadas",
+                "",
+                "JUSTIFICACIÓN vs CAUSAS:",
+                "• Acceso continuo a BD → Mejora hábitos (C2)",
+                "• Mentorías incluidas → Resuelve vacíos (C1)",
+                "• Precio accesible → Reduce barreras (C3)",
+                "",
+                "PAY-PER-USE (30%):",
+                "• Mentoría S/4-6 (no suscritos)",
+                "• Exámenes individuales S/5-8"
+            ],
+            actividades: [
+                "ALINEADAS A ATACAR CAUSAS:",
+                "",
+                "1. CURACIÓN DE BASE DE DATOS ",
+                "   → Ataca CAUSA 2 directamente",
+                "   • Organizar exámenes por profesor",
+                "   • Crear perfiles 'Cómo aprobar'",
+                "   • Validar trabajos modelo",
+                "",
+                "2. MENTORÍA PERSONALIZADA",
+                "   → Ataca CAUSA 1 directamente",
+                "   • Matching estudiante-profesor",
+                "   • Sesiones resolviendo vacíos",
+                "",
+                "3. GESTIÓN DE COMUNIDAD",
+                "   → Ataca CAUSA 3 directamente",
+                "   • Contenido motivacional",
+                "   • Casos de éxito visibles",
+                "   • Engagement continuo"
+            ],
+            recursos: [
+                "RECURSOS PARA ATACAR CAUSAS:",
+                "",
+                "→ CAUSA 1 (Deficiencias):",
+                "• Red de 3-20 profesores expertos",
+                "• Plataforma Zoom para explicaciones",
+                "",
+                "→ CAUSA 2 (Hábitos):",
+                "• Base de datos con 500+ exámenes ",
+                "• Curator: organiza contenido",
+                "• Algoritmo de búsqueda por profesor",
+                "",
+                "→ CAUSA 3 (Motivación):",
+                "• Comunidad de usuarios",
+                "• Sistema de gamificación",
+                "• Contenido testimonial"
+            ],
+            socios: [
+                "ALIADOS PARA ATACAR CAUSAS:",
+                "",
+                "→ CAUSA 1:",
+                "• Profesores/tutores freelance",
+                "  (Resuelven vacíos conceptuales)",
+                "",
+                "→ CAUSA 2:",
+                "• Estudiantes contribuyentes",
+                "  (Aportan exámenes y trabajos)",
+                "• Embajadores de aula",
+                "  (Difunden guías de estudio)",
+                "",
+                "→ CAUSA 3:",
+                "• UDH (alianza institucional futura)",
+                "  (Valida y da credibilidad)",
+                "",
+                "• Zoom, Culqi (pagos), AWS (hosting)"
+            ],
+            costos: [
+                "COSTOS ALINEADOS A CAUSAS:",
+                "",
+                "FIJOS (S/1,530/mes):",
+                "• Curator BD: S/500 → CAUSA 2",
+                "• Community Manager: S/400 → CAUSA 3",
+                "• Hosting/Zoom: S/330 → CAUSA 1 y 2",
+                "• Marketing: S/200 → CAUSA 3",
+                "",
+                "VARIABLES:",
+                "• Pago profesores (C1): S/3/sesión",
+                "• Incentivos contribuyentes (C2): S/5/examen",
+                "• Pasarela pagos: 4% MRR",
+                "",
+                "Total: S/1,794/mes"
+            ]
+        };
+
+        let activeBlock = null;
+
+        function renderContent(blockId) {
+            const content = blocks[blockId];
+            const container = document.getElementById(`${blockId}-content`);
+            container.innerHTML = content.map(line => 
+                line === '' ? '<p class="empty"></p>' : `<p>${line}</p>`
+            ).join('');
         }
+
+        function toggleBlock(blockId) {
+            const block = document.querySelector(`.block.${blockId}`);
+            
+            if (activeBlock === blockId) {
+                block.classList.remove('active');
+                activeBlock = null;
+            } else {
+                if (activeBlock) {
+                    document.querySelector(`.block.${activeBlock}`).classList.remove('active');
+                }
+                block.classList.add('active');
+                activeBlock = blockId;
+            }
+        }
+
+        // Initialize content
+        Object.keys(blocks).forEach(blockId => renderContent(blockId));
+
+        // Initialize Lucide icons
+        lucide.createIcons();
     </script>
 </body>
 </html>
